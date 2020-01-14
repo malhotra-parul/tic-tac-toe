@@ -1,7 +1,5 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
-
 In the project directory, you can run:
 
 ### `npm start`
@@ -12,57 +10,34 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
-### `npm test`
+### Steps to implement the game :
+1. Create three basic components - 
+    a. Square - renders a square component which ocnsists of a button with no value to be displayed
+    b. Board - renders a Square component and creates a 3*3 grid. Also, displays status of next player's turn as a string.
+    c. Game - renders two div tags - first consists of Board and second consists of game-info which displays status and steps taken by user on the grid as an ordered list of buttons.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. Next, we display value "X" when the user clicks on any square. For this, we create a variable "value" in this.state and initialize it to null. When a user clicks on any square, onClick method is invoked which calls this.setState() to reset the state of the variable value to "X" and renders the updated page automatically.
 
-### `npm run build`
+3. We also display the "this.state.value" on the button. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. Next, we are going to lift the state up to the parent component - Board. We are doing so to maintain the entire game state in board component rather than every square keeping its own state seperately as doing so will get difficult to manage otherwise. We are going to use props instead of this.state to pass value and onClick method from Board to Square component.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+5. For this, firstly we create a constructor in Board component and create a state variable "squares" which holds an Array of size 9 containing all null values initially. This array consists of individual values held by each square.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+6. We use a method - renderSquare(i) which returns a Square component. Here, i is initialised at the time of rendering the Squares in the Board component. i holds values from 0 to 9 depending upon the position of the square in the grid.
 
-### `npm run eject`
+7. In renderSquare method while returning the Square component we will include a props - "value" which will contain the value as this.state.squares[i]. Initially all values will be null. However, we will also implement a function handleClick(i) which shall be invoked when any square is clicked. Now, our renderSquare(i) will return a Square component like this:
+<Square value={this.state.squares[i]} onClick={()=>{this.handleClick(i)}} />
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+8. Also, we will be needed to update the Square's render method to use the defined props. We will replace this.state.value to this.props.value &
+update the onClick method to this.props.onClick
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+9. Now, we will implement handleClick() in Board component. 
+    Step 1 - create a const squares which will hold the copy of squares-  this.state.squares.slice()
+    Step 2 - We will set squares[i] to "X" (for the time being)
+    Step 3 - Call this.setState({squares: squares}) to update the squares array and render the component again.
+The reason we are working on a copy of squares array rather than modifying the original one is it will later help us when we want to time travel to an older state.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+10. We can choose to convert Squares from class component to a functional component as it now has a render() method only and rest everything is getting controlled from its parents component.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+11. 
