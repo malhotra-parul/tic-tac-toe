@@ -11,10 +11,10 @@ The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
 ## Steps to implement the game :
-1. Create three basic components - 
-    a. *Square* - renders a square component which ocnsists of a button with no value to be displayed
-    b. *Board* - renders a Square component and creates a 3*3 grid. Also, displays status of next player's turn as a string.
-    c. *Game* - renders two div tags - first consists of Board and second consists of game-info which displays status and steps taken by user on the grid as an ordered list of buttons.
+1. Create three basic components -
+    1.1 Square - renders a square component which ocnsists of a button with no value to be displayed
+    1.2 Board - renders a Square component and creates a 3*3 grid. Also, displays status of next player's turn as a string.
+    1.3 Game - renders two div tags - first consists of Board and second consists of game-info which displays status and steps taken by user on the grid as an ordered list of buttons.
 
 2. Next, we display value "X" when the user clicks on any square. For this, we create a variable "value" in this.state and initialize it to null. When a user clicks on any square, onClick method is invoked which calls t*his.setState()* to reset the state of the variable value to "X" and renders the updated page automatically.
 
