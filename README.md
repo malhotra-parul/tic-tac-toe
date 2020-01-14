@@ -30,12 +30,12 @@ You will also see any lint errors in the console.
 *<Square value={this.state.squares[i]} onClick={()=>{this.handleClick(i)}} />*
 
 8. Also, we will be needed to update the Square's render method to use the defined props. We will replace *this.state.value to this.props.value &
-update the onClick method to this.props.onClick
-*
+update the onClick method to this.props.onClick*
+
 9. Now, we will implement handleClick() in Board component. 
-    *Step 1 - create a const squares which will hold the copy of squares-  this.state.squares.slice()
+    Step 1 - create a const squares which will hold the copy of squares-  this.state.squares.slice()
     Step 2 - We will set squares[i] to "X" (for the time being)
-    Step 3 - Call this.setState({squares: squares}) to update the squares array and render the component again.*
+    Step 3 - Call this.setState({squares: squares}) to update the squares array and render the component again.
 The reason we are working on a copy of squares array rather than modifying the original one is it will later help us when we want to time travel to an older state.
 
 10. We can choose to convert Squares from class component to a *functional component* as it now has a render() method only and rest everything is getting controlled from its parents component.
