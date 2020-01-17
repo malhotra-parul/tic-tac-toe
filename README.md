@@ -40,4 +40,10 @@ The reason we are working on a copy of squares array rather than modifying the o
 
 10. We can choose to convert Squares from class component to a *functional component* as it now has a render() method only and rest everything is getting controlled from its parents component.
 
-11. 
+11. Let's now create a second player- "O". For this, we will add a new state "xIsNext" and set it to true. Each time a player moves, value of xIsNExt state shall be flipped in handleClick() this.state() call. We shall also update the status variable to include a condition for second player as well.
+
+12. In order to calculate a winner, we create a simple function where in we create an array named lines which contains all the indexes in our 3*3 grid, for which a user can win. Next we iterate over the lines array and create a new const with 3 variables a,b,c to store values of the three indices and we check for a match. The condition will check three things, firstly, value in square[a] should not be null. Secondly, value in squares[a] should be equal to value in squares[b] and thirdly value in squares[a] should be equal to value in squares[c].
+
+13. We call this function inside of render and add a condition to print winner, in case we have one.
+
+The game is ready to be played!
